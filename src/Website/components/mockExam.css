@@ -1,0 +1,209 @@
+body {
+    font-family: Arial, sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  
+  }
+  
+  .left-content {
+    max-width: 50%;
+  }
+  
+  .left-content h1 {
+    color: #007bff;
+    margin-left: 10px;
+  }
+  
+  .left-content .text-purple {
+    color: #6f42c1;
+  }
+  
+  .left-content p {
+    color: #6c757d;
+    margin-top: 10px;
+  }
+  
+  .left-content button {
+    margin-top: 20px;
+  }
+  
+  .right-content img {
+    max-height: 400px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .main-container {
+  
+    padding: 20px;
+    background: color #f6e8ea;;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+  
+    color: #333;
+    font-weight: bolder;
+    margin-left: 140px;
+  }
+  
+  
+  /* Full-Length Mock Exams Section */
+  .section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 50vh;
+  }
+  
+  .content {
+    flex: 1;
+    padding-right: 20px;
+  }
+  
+  .content h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    font-size: 1.2rem;
+    color: #555555;
+  }
+  
+  .image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .image img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Responsive Media Queries for Mock Exams Section */
+  @media (max-width: 768px) {
+    .section {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .content,
+    .image {
+      max-width: 100%;
+    }
+  
+    .content h2 {
+      font-size: 1.5rem;
+    }
+  
+    .content ul {
+      font-size: 0.9rem;
+    }
+  }
+  .button-container {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+  
+  .buy-now {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .buy-now:hover {
+    background-color: #45a049;
+  
+  }
+  .contact-section {
+    padding: 2rem;
+    background: hsl(240, 47%, 87%);
+    text-align: center;
+  }
+  
+  .contact-section h2 {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 1rem;
+    font-weight: bolder;
+  }
+  
+  .contact-section p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2rem;
+  }
+  
+  .contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .contact-form .form-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .contact-form button {
+    width: 100%;
+    padding: 20px 30px;
+    border: none;
+    background: #007bff;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .contact-form button:hover {
+    background: #0056b3;
+  }
+  
+  /* Responsive Design */
+  @media (min-width: 768px) {
+    .contact-form .form-group input {
+      width: calc(50% - 0.5rem);
+    }
+  }
+  
+    .contact-form .form-group textarea {
+      width: 100%;
+    }
+  

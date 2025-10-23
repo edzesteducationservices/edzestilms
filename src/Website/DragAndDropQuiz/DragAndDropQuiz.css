@@ -1,0 +1,577 @@
+.quiz-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* FLEXIBLE QUIZ CONTENT */
+  .quiz-content {
+    display: flex;
+    justify-content: space-between; /* Default layout: Drag on left, Drop on right */
+    align-items: flex-start;
+    gap: 40px;
+    padding: 20px;
+  }
+  
+  /* When all items are dropped, center the drop zones */
+  .quiz-content.center-drops {
+    justify-content: center;
+  }
+  
+  /* DRAGGABLE ITEMS CONTAINER */
+  .drag-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  /* DROPZONE CONTAINER */
+  .drop-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  /* DRAG ITEM */
+  .drag-item {
+    padding: 15px;
+    background-color: #d3d3d3; /* Grey Background */
+    color: black;
+    border-radius: 8px;
+    cursor: grab;
+    text-align: center;
+    width: 250px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* ✅ Makes it responsive */
+    max-width: 250px; /* ✅ Ensures proper size */
+    height: 80px; /* ✅ Increased height */
+    transition: transform 0.2s;
+    margin-right: 20px; /* ✅ Adds space between drag item and drop zone */
+  }
+  .drag-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .drag-item:active {
+    transform: scale(1.05);
+  }
+  .drag-drop-row {
+    display: flex;
+    align-items: center; /* Ensures drag items and drop zones are aligned vertically */
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .drag-drop-area {
+    display: flex;
+    flex-direction: column; /* Stack pairs of drag and drop items in a row */
+    gap: 10px; /* Adds spacing between each row */
+  }
+  
+  /* DROPZONE */
+  
+  /* Drop Zone Box */
+  .drop-zone {
+    width: 100%; /* ✅ Makes it responsive */
+    max-width: 400px; /* ✅ Increased width but keeps it manageable */
+    min-height: 60px;
+   
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d3d3d3;
+    padding: 15px;
+    text-align: center;
+    word-wrap: break-word; /* ✅ Ensures text stays inside */
+    overflow-wrap: break-word; /* ✅ Prevents text overflow */
+    white-space: normal; /* ✅ Allows text to wrap */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    
+  }
+  .drop-zone:hover {
+    background-color: #bdbdbd;
+  }
+
+  @media (max-width: 768px) {
+    .drop-zone {
+      width: 90%; /* Increase width for mobile view */
+      max-width: none; /* Remove max width if needed */
+    }
+  }
+  
+  /* BUTTON */
+  button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0056b3;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #003f7f;
+  }
+  
+  
+  /* SCORE CONTAINER */
+  .score-container {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f1f1f1;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  
+  /* PLACED ITEM STYLING */
+  .placed-item {
+    color: green;
+    font-weight: bold;
+  }
+  /* Update question header styling */
+  .question-header {
+    font-size: 20px; /* Keep text size same */
+    font-weight: 500; /* Medium font weight instead of bold */
+    text-align: center;
+    margin-bottom: 20px;
+    white-space: normal; /* Allows wrapping */
+    word-wrap: break-word; /* Ensures text breaks properly */
+    max-width: 90%;
+  }
+  /* Style for Correct Matches Box */
+  .correct-matches-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa; /* Light gray background */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    border: 1px solid #4748ac; /* Blue border for visibility */
+  }
+  
+  .correct-matches-box h3 {
+    color: forestgreen; /* Blue heading */
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .correct-matches-box ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .correct-matches-box li {
+    padding: 5px;
+    font-size: 16px;
+    
+  }
+  /* Solution Buttons Container */
+  .solution-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* ✅ Adds space between buttons */
+    margin-top: 20px; /* ✅ Pushes buttons away from content */
+    padding: 10px 0; /* ✅ Adds spacing around buttons */
+  }
+  
+  /* Ensure buttons are properly styled */
+  .solution-buttons-container button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #4748ac;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .solution-buttons-container button:hover {
+    background-color: #4748ac;
+  }
+  
+  .solution-buttons-container button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  /* Solution Buttons Container */
+  .solution-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* ✅ Adds space between buttons */
+    margin-top: 20px; /* ✅ Pushes buttons away from content */
+    padding: 10px 0; /* ✅ Adds spacing around buttons */
+  }
+  
+  /* Solution Correct Matches Box */
+  .correct-matches-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa; /* Light gray background */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    border: 2px solid #007bff; /* Blue border for visibility */
+  }
+  
+  .correct-matches-box h3 {
+    color: #007bff; /* Blue heading */
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Correct Matches List */
+  .correct-matches-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* ✅ Adds space between each match */
+  }
+  
+  /* ✅ Each correct match inside a separate box */
+  .correct-match-item {
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #007bff; /* ✅ Blue border for structure */
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  /* Solution Buttons Container */
+  .solution-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 10px 0;
+  }
+  
+  /* Solution Correct Matches Box */
+  .correct-matches-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px solid #4748ac;
+  }
+  
+  .correct-matches-box h3 {
+    color: #4748ac;
+    margin-bottom: 10px;
+  }
+  
+  /* Correct Matches List */
+  .correct-matches-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  /* ✅ Row-wise structure for correct match */
+  .correct-match-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  /* ✅ Box for term */
+  .term-box {
+    padding: 15px;
+    background-color: #d3d3d3; /* Grey Background */
+    color: black;
+    border-radius: 8px;
+    cursor: grab;
+    text-align: center;
+    width: 250px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* ✅ Makes it responsive */
+    max-width: 250px; /* ✅ Ensures proper size */
+    height: 80px; /* ✅ Increased height */
+    transition: transform 0.2s;
+    margin-right: 20px; 
+  }
+  
+  /* ✅ Box for definition */
+  .definition-box {
+    width: 100%; /* ✅ Makes it responsive */
+    max-width: 400px; /* ✅ Increased width but keeps it manageable */
+    min-height: 60px;
+   
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d3d3d3;
+    padding: 15px;
+    text-align: center;
+    word-wrap: break-word; /* ✅ Ensures text stays inside */
+    overflow-wrap: break-word; /* ✅ Prevents text overflow */
+    white-space: normal; /* ✅ Allows text to wrap */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* ✅ Arrow between boxes */
+  .arrow {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+  }
+  .solution-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 10px 0;
+  }
+  
+  /* ✅ Your Attempt Section Box */
+  .your-attempt-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e6e7f6; /* Light Yellow Background */
+    border-radius: 8px;
+    border: 2px solid #e6e7f6; /* Orange Border */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* ✅ List of attempts inside "Your Attempt" section */
+  .your-attempt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  /* ✅ Box for each attempted match */
+  .your-attempt-item {
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 2px solid #e6e7f6; /* Orange Border */
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    width: 80%;
+    text-align: center;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Solution Buttons Container */
+  .solution-buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 10px 0;
+  }
+  
+  /* ✅ Your Attempt Section Box */
+  .your-attempt-box {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e6e7f6; /* Light Yellow Background */
+    border-radius: 8px;
+    border: 2px solid #e6e7f6; /* Orange Border */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* ✅ Your Attempt List (Aligned) */
+  .your-attempt-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  /* ✅ Row-wise structure for attempts */
+  .your-attempt-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* ✅ Correct Attempt - Green */
+  .correct-attempt {
+    border: 1px solid #28a745;
+    background-color: #e6e7f6;
+  }
+  
+  /* ✅ Incorrect Attempt - Red */
+  .incorrect-attempt {
+    border: 1px solid #dc3545;
+    background-color: #e6e7f6;
+  }
+  /* ✅ Style for Serial Number in Your Attempt */
+  
+  /* ✅ Button Container */
+  .quiz-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  /* ✅ Previous Button Styling */
+  .prev-btn {
+    background-color: #28a745; /* Success Green */
+    color: white;
+    margin-right: 50px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .prev-btn:hover {
+    background-color: #e0a800; /* Darker yellow */
+    margin-left: 20px;
+  }
+  
+  /* ✅ Next Button Styling */
+  .next-btn {
+    background-color: #28a745; /* Success Green */
+    color: white;
+    margin-right: 50px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    display: block;
+    margin-left: auto;  /* Pushes the button to the right */
+    margin-top: 20px;   /* Adds space from the content above */
+}
+
+  
+  .next-btn:hover {
+    background-color: #218838; /* Darker green */
+  }
+  
+  /* ✅ Submit Button Styling */
+  .submit-btn {
+    background-color: #007bff; /* Primary Blue */
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .submit-btn:hover {
+    background-color: #0056b3; /* Darker blue */
+  }
+    
+
+  /* .refresh-icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #4748ac;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .refresh-icon:hover {
+    transform: rotate(180deg);
+    color: #4748ac;
+  }
+
+  .question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  } */
+
+
+  .next-btn {
+    background-color: #28a745; /* Success Green */
+    color: white;
+    margin-right: 50px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    display: block;
+    margin-left: auto;  /* Aligns Next button to the right */
+    margin-top: 20px;
+}
+
+.quiz-container {
+  position: relative; /* Ensure relative positioning */
+  padding: 20px;
+}
+
+.next-btn {
+  background-color: #28a745; /* Success Green */
+  color: white;
+  margin-right: 50px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  display: block;
+  margin-left: auto;  /* Aligns Next button to the right */
+  margin-top: 20px;
+}
+
+/* Refresh Icon inside the container at bottom-left */
+.refresh-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50px;
+}
+
+.refresh-icon {
+  cursor: pointer;
+  font-size: 1.8rem;
+  color: #4748ac;
+  transition: transform 0.2s ease-in-out;
+}
+
+.refresh-icon:hover {
+  transform: rotate(180deg);
+  color: #4748ac;
+}
+

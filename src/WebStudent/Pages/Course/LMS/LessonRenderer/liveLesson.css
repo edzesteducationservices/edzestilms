@@ -1,0 +1,58 @@
+/* Centered black 16:9 frame that expands in fullscreen */
+.live-lesson-wrap .live-frame {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  background: #000;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+/* When the fullscreen host is active, let the frame stretch */
+.lesson-overlay-wrap:fullscreen .live-frame,
+:-webkit-full-screen .lesson-overlay-wrap .live-frame {
+  width: 100%;
+  max-width: none;
+  aspect-ratio: unset;
+  height: calc(100vh - 0px);
+  border-radius: 0;
+}
+
+/* Join button over the black frame */
+.live-join-btn {
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #111827;
+  color: #f9fafb;
+  font-weight: 600;
+  cursor: pointer;
+}
+.live-join-btn:hover { background: #0b1220; }
+
+/* Live-only status */
+.live-in-progress {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: #f3f4f6;
+  font-size: 14px;
+  opacity: 0.95;
+}
+.live-in-progress .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+}
+
+/* Video element fills the frame */
+.live-video { display: block; }

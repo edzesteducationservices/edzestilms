@@ -1,0 +1,31 @@
+/* When the root/page is fullscreen, hide site chrome */
+:root:fullscreen .site-header,
+:root:fullscreen .main-navbar,
+:root:fullscreen .course-sidebar,
+:root:fullscreen header,
+:root:fullscreen nav,
+:root:fullscreen .right-pane {
+  display: none !important;
+}
+
+/* Make the article scroller fill the viewport when page is fullscreen */
+:root:fullscreen .lesson-overlay-wrap .article-scroller {
+  max-height: none !important;
+  height: 100vh !important;
+  border-radius: 0 !important;
+}
+
+/* Safari/WebKit prefix fallback */
+:-webkit-full-screen .site-header,
+:-webkit-full-screen .main-navbar,
+:-webkit-full-screen .course-sidebar,
+:-webkit-full-screen header,
+:-webkit-full-screen nav,
+:-webkit-full-screen .right-pane {
+  display: none !important;
+}
+:-webkit-full-screen .lesson-overlay-wrap .article-scroller {
+  max-height: none !important;
+  height: 100vh !important;
+  border-radius: 0 !important;
+}

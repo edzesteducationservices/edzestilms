@@ -1,0 +1,45 @@
+/* 🔹 Default Desktop View (No Change) */
+.custom-nav-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+  
+  .tab-container {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  
+  .tab-link {
+    cursor: pointer;
+    color: #4748ac;
+    font-weight: normal;
+    border-color: transparent;
+    outline: 0;
+    box-shadow: none;
+    padding: 8px 12px;
+  }
+  
+  /* 🔥 Mobile-Only Styles (Fix Wrapping Issue) */
+  @media (max-width: 768px) {
+    .custom-nav-tabs {
+      flex-wrap: nowrap; /* Prevents wrapping */
+      overflow-x: auto; /* Enables horizontal scrolling */
+      white-space: nowrap;
+    }
+  
+    .tab-link {
+      font-size: 14px; /* Reduce font size */
+      padding: 6px 8px; /* Reduce padding */
+    }
+  
+    .tab-container {
+      flex-shrink: 0; /* Prevents tabs from stretching */
+    }
+  
+    .tab-separator {
+      margin: 0 3px; /* Reduce space between ">" */
+    }
+  }
+  

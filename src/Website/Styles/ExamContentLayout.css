@@ -1,0 +1,300 @@
+.exam-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  gap: 1.5rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.exam-content {
+  flex: 1;
+  max-width: 72%;
+}
+
+.question-header h2 {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.question-info p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.question-box {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  background: #fafafa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.options-container {
+  margin-top: 1rem;
+}
+
+.option-box {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  cursor: default;
+}
+
+.option-box.correct {
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+  color: white;
+}
+
+.option-box.incorrect {
+  background-color: #f44336;
+  border-color: #f44336;
+  color: white;
+}
+
+.option-box.highlight-correct {
+  background-color: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+.explanation-toggle {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: #4748ac;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.explanation-toggle:hover {
+  background-color: #acafec;
+}
+
+.explanation-toggle.active {
+  background-color: #4748ac;
+  color: white;
+}
+
+.explanation-box,
+.explanation-panel {
+  margin-top: 0.75rem;
+  padding: 10px 14px;
+  background: #e6f0ff;
+  border-left: 4px solid #4748ac;
+  border-radius: 6px;
+}
+
+.nav-buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-buttons button {
+  padding: 10px 18px;
+  background-color: #4748ac;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.nav-buttons button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.exam-sidebar {
+  width: 25%;
+  padding-left: 1rem;
+  border-left: 1px solid #ddd;
+}
+
+.navigator-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;              /* More spacing horizontally & vertically */
+  margin-top: 12px;
+  justify-content: flex-start; /* Align to left */
+}
+
+.navigator-btn {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+  display: flex;                  /* ✅ Makes it a flex container */
+  align-items: center;           /* ✅ Vertical center */
+  justify-content: center;       /* ✅ Horizontal center */
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 0;                     /* ✅ Remove any padding offset */
+}
+
+
+.navigator-btn:hover {
+  background-color: #e6e6e6;
+  border-color: #aaa;
+}
+
+.navigator-btn.active {
+  background-color: #4748ac;
+  color: white;
+  border-color: #4748ac;
+  box-shadow: 0 0 6px rgba(71, 72, 172, 0.5);
+}
+
+
+.status-legend ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 12px;
+}
+
+.status-legend li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.green {
+  background-color: #28a745;
+}
+
+.dot.red {
+  background-color: #dc3545;
+}
+
+/* ✅ Drag-and-Drop Solution Layout Matching Edzest */
+.drag-drop-solution-edzest {
+  background-color: #f9f9ff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.drag-drop-solution-edzest .section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 1rem 0;
+  color: #333;
+  text-align: center;
+}
+
+.drag-drop-solution-box table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.drag-drop-solution-box th,
+.drag-drop-solution-box td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.match-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #eaeaea;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+}
+
+.match-card.correct {
+  border-color: #4caf50;
+  background-color: #e0f7e9;
+}
+
+.match-card.incorrect {
+  border-color: #f44336;
+  background-color: #ffe6e6;
+}
+
+.match-card.readonly {
+  background-color: #f3f3f3;
+}
+
+.left-box, .right-box {
+  width: 40%;
+  text-align: center;
+  padding: 0.5rem;
+  background: #ddd;
+  border-radius: 6px;
+}
+
+.arrow {
+  width: 10%;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.icon {
+  width: 10%;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+
+.explanation-panel {
+  background-color: #e6f0ff; /* soft blue */
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.explanation-toggle {
+  background-color: #4748ac;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.explanation-toggle:hover {
+  background-color: #acafec;
+}
+
+/* 🔵 Blue when active */
+.explanation-toggle.active {
+  background-color: #4748ac;
+  color: white;
+}
+
+  
+  

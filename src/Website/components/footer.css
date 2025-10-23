@@ -1,0 +1,20 @@
+footer {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  footer .text-lg {
+    font-size: 1.125rem; /* Adjust font size for better rendering */
+  }
+  
+  /* Media query for mobile responsiveness */
+  @media (max-width: 768px) {
+    footer {
+      font-size: 14px; /* Adjust font size for smaller screens */
+    }
+    .footer-icon {
+      font-size: 2rem; /* Adjust social media icon size */
+    }
+  }
+  

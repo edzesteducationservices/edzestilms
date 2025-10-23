@@ -1,0 +1,37 @@
+/* Fullscreen: make the wrapper and scroller light themed */
+.lesson-overlay-wrap:fullscreen,
+.lesson-overlay-wrap:-webkit-full-screen {
+  background: #fff !important;
+  color: #111 !important;
+  color-scheme: light; /* disable any auto dark theming */
+}
+
+/* The scrollable reading surface */
+.lesson-overlay-wrap:fullscreen .article-scroller,
+.lesson-overlay-wrap:-webkit-full-screen .article-scroller {
+  background: #fff !important;
+  color: #111 !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+}
+
+/* Ensure the HTML-rendered article block has a white canvas */
+.lesson-overlay-wrap:fullscreen .article-scroller > .p-2,
+.lesson-overlay-wrap:-webkit-full-screen .article-scroller > .p-2 {
+  background: #fff !important;
+  color: #111 !important;
+}
+
+/* Iframes (PDFs/externals) sit on white too (can’t style inside cross-origin) */
+.lesson-overlay-wrap:fullscreen .article-scroller iframe,
+.lesson-overlay-wrap:-webkit-full-screen .article-scroller iframe {
+  background: #fff !important;
+  display: block;
+}
+
+/* Keep your existing alignment rules (unchanged) */
+.ql-editor .ql-align-center img { display:block; margin-left:auto; margin-right:auto; }
+.ql-editor .ql-align-right  img { display:block; margin-left:auto; margin-right:0; }
+.ql-editor .ql-align-left   img { display:block; margin-left:0;    margin-right:auto; }
+.ql-editor img { max-width:100%; height:auto; }
+.ql-editor p.ql-image-caption { margin-top:4px; text-align:center; color:#64748b; font-size:12px; font-style:italic; }

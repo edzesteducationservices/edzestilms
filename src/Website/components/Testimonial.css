@@ -1,0 +1,87 @@
+/* Carousel Item Styling */
+.flex {
+    display: flex;
+  }
+  
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+  
+  .space-x-6 > :not([hidden]) + :not([hidden]) {
+    margin-left: 1.5rem; /* Adjust space between items */
+  }
+  
+  .flex-shrink-0 {
+    flex-shrink: 0;
+  }
+  
+  .w-64 {
+    width: 16rem;
+  }
+  
+  .bg-white {
+    background-color: white;
+  }
+  
+  .p-6 {
+    padding: 1.5rem;
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .border {
+    border-width: 1px;
+  }
+  
+  .border-gray-200 {
+    border-color: #e5e7eb;
+  }
+  
+  .rounded-full {
+    border-radius: 50%;
+  }
+  
+  .w-24 {
+    width: 6rem;
+  }
+  
+  .h-24 {
+    height: 6rem;
+  }
+  
+  .object-cover {
+    object-fit: cover;
+  }
+  
+  .mt-4 {
+    margin-top: 1rem;
+  }
+  
+  .text-gray-900 {
+    color: #1a202c;
+  }
+  
+  .text-gray-600 {
+    color: #4748ac;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .hover\:bg-[#4748ac]:hover {
+    background-color: #4748ac;
+  }
+  
+  @media (max-width: 768px) {
+    .space-x-6 > :not([hidden]) + :not([hidden]) {
+      margin-left: 1rem;
+    }
+  }
+  

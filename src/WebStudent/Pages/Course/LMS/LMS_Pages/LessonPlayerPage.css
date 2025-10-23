@@ -1,0 +1,472 @@
+/* ===== Udemy-like lesson page layout (logic unchanged) ===== */
+
+/* Hide native fullscreen button across engines */
+video::-webkit-media-controls-fullscreen-button { display: none !important; }
+video::-webkit-media-controls-enclosure { overflow: hidden; }
+
+
+
+
+/* Ensure overlay draws above media/iframe when wrapper is fullscreen */
+.lesson-overlay-wrap { position: relative; }
+.lesson-overlay-wrap video,
+.lesson-overlay-wrap iframe,
+.lesson-overlay-wrap embed,
+.lesson-overlay-wrap object {
+  position: relative;
+  z-index: 1;
+}
+
+
+:root{
+  --bg-page:#f7f8fa;
+  --bg-card:#ffffff;
+  --text-900:#111827;
+  --text-700:#374151;
+  --text-500:#6b7280;
+  --brand:#5624d0;      /* Udemy purple */
+  --brand-600:#401b9c;
+  --border:#e5e7eb;
+  --success:#22c55e;
+  --nav-h:72px;         /* adjust to your real header height */
+}
+
+/* Page scaffold */
+.lesson-page{
+  
+   align-items:start; 
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 360px;  /* content | sidebar */
+  gap:14%;
+  padding:12px 20px;                          /* tighter band like Udemy */
+  min-height:100vh;
+  background:var(--bg-page);
+  align-items:start;                           /* <-- keep top edges aligned */
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+}
+
+/* Ensure CONTENT is left and SIDEBAR on the right */
+.content{grid-column:1; padding:0; background:transparent; overflow:visible;}
+.sidebar{grid-column:2; position:relative;}
+
+/* Title (compact like in the screenshot) */
+.lesson-title{
+  margin:0 0 10px 0;
+  font-size:20px;
+  line-height:1.3;
+  font-weight:700;
+  color:var(--text-900);
+}
+
+/* Dark "theater" band behind the player (like Udemy) */
+.theater{
+  padding-left: 50px;
+  padding-right: 50px;
+  background:#0f1117;      /* dark slate */
+  border-radius:8px;            /* thin gutter around the video */
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+  margin:0 0 12px 0;       /* snug above the tabs/description */
+}
+
+/* The player box: standard 16:9, no extra frame */
+.video-container{
+  width:100%;
+  aspect-ratio:16/9;       /* never 14/9 */
+  background:#000;         /* cinema canvas directly behind the video */
+  border-radius:6px;
+  overflow:hidden;         /* hides any internal overdraw, keeps controls visible */
+  margin:0; box-shadow:none;
+}
+
+/* The actual media fills the container (remove any 80% sizing you had) */
+.video-container video,
+.video-container iframe{
+  width:100% !important;
+  height:100% !important;
+  display:block;
+  object-fit:cover;
+  border-radius:0 !important;
+}
+
+
+
+/* Description block (Udemy-like measure and tone) */
+.lesson-desc{
+  margin:0;
+  color:var(--text-700);
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* Sticky sidebar card */
+.sidebar .sidebar-panel{
+  position:sticky;
+  top:var(--nav-h);                                   /* matches header height */
+  max-height:calc(100vh - (var(--nav-h) + 16px));     /* never pushes content */
+  overflow:auto;                                      /* scroll inside card */
+  -webkit-overflow-scrolling:touch;
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  box-shadow:0 6px 22px rgba(0,0,0,.06);
+}
+
+/* Sidebar header — small & bold like Udemy */
+.sidebar-header{
+  position:sticky; top:0; z-index:2;
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  padding:12px 14px 10px;
+}
+.sidebar-header .ch{
+  font-size:13px;          /* smaller than before */
+  font-weight:800;
+  letter-spacing:.02em;
+  color:var(--text-900);
+}
+
+/* In case older SyllabusSidebar injected its own wrapper styles, neutralize them */
+.syllabus-wrapper-reset,
+.sidebar .sidebar-panel .syllabus-wrapper{
+  padding:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+/* ===== Course content rows (checkbox look, compact) ===== */
+.lesson-card{
+  position:relative;
+  display:grid;
+  grid-template-columns:16px 1fr auto; /* box | title | duration */
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  margin:0;
+  border:0;
+  border-bottom:1px solid var(--border);
+  background:transparent;
+  cursor:pointer;
+  font-size:14px;
+  transition:background .15s ease;
+}
+.lesson-card:last-child{border-bottom:0;}
+.lesson-card:hover{background:#f8fafc;}
+
+.lesson-card::before{
+  content:"";
+  width:12px; height:12px;
+  border:2px solid #9ca3af;
+  border-radius:3px;
+  display:inline-block;
+}
+.lesson-card.completed::before{
+  content:"✓";
+  color:#fff;
+  background:var(--success);
+  border-color:var(--success);
+  font-size:10px;
+  line-height:12px;
+  text-align:center;
+}
+
+.lesson-card .lesson-title{
+  margin:0;
+  color:#1f2937;
+  font-weight:500;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.lesson-card .lesson-duration{
+  justify-self:end;
+  color:var(--text-500);
+  font-size:12px;
+}
+
+.lesson-card.active-lesson{
+  background:#eef2ff;                 /* subtle purple tint */
+  border-left:3px solid var(--brand); /* purple stripe */
+  padding-left:11px;                  /* compensate border */
+}
+.lesson-card.active-lesson .lesson-title{
+  color:var(--brand-600);
+  font-weight:700;
+}
+
+/* Hover preview anchored to row */
+.lesson-preview{
+  position:absolute; left:100%; top:0;
+  margin-left:10px; width:220px; z-index:10;
+  background:#fff; border-radius:8px; overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+.lesson-preview video{width:100%; height:auto; display:block;}
+
+/* ===== Up-next overlay (centered, matching screenshot) ===== */
+.upnext-overlay{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(6,10,25,.78); z-index:9999; }
+.upnext-overlay.show{ display:flex; }
+.upnext-card{ width:min(680px,92vw); background:#0b1220; color:#e6edf7; border-radius:14px; padding:28px 26px; text-align:center; box-shadow:0 18px 60px rgba(0,0,0,.35); }
+.upnext-title{ font-size:12px; letter-spacing:.08em; opacity:.85; margin-bottom:8px; }
+.upnext-name{ font-size:18px; font-weight:800; margin-bottom:18px; }
+.upnext-meta{ font-size:12px; opacity:.75; margin-bottom:22px; }
+.upnext-play{ width:76px; height:76px; border-radius:999px; margin:0 auto 12px; display:grid; place-items:center; cursor:pointer; border:3px solid rgba(255,255,255,.85); background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(255,255,255,.65)); box-shadow:0 10px 30px rgba(0,0,0,.35); transition:transform .12s ease; }
+.upnext-play:hover{ transform:scale(1.05); }
+.upnext-actions{ margin-top:6px; font-size:12px; opacity:.85; }
+.upnext-cancel{ text-decoration:underline; cursor:pointer; margin-left:10px; }
+.upnext-count{ margin-left:8px; opacity:.9; }
+
+/* ===== Responsive ===== */
+@media (max-width:1024px){
+  .lesson-page{ grid-template-columns:1fr; gap:16px; }
+  .sidebar .sidebar-panel{ position:relative; top:0; max-height:none; }
+}
+
+/* Simple fade/slide animations (kept minimal) */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideInUp{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+
+/* Ensure Video.js fluid players always have visible height */
+[data-vjs-player] .video-js.vjs-fluid {
+  /* 16:9 padding-top hack — Video.js normally injects this, but this guarantees it */
+  padding-top: 56.25% !important; /* 9 / 16 * 100 */
+}
+
+/* Optional: make sure the player can expand to container width */
+[data-vjs-player] .video-js {
+  width: 100% !important;
+}
+
+/* Optional: a minimum height so you see a box even before metadata */
+[data-vjs-player] .video-js {
+  min-height: 240px; /* tweak if you want; purely visual */
+  background: #000;
+}
+
+
+/* Position context for overlay nav */
+.lesson-overlay-wrap {
+  position: relative;
+}
+
+/* Hide arrows until hover (desktop) */
+.lesson-overlay-wrap .overlay-nav {
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+/* Reveal on hover */
+.lesson-overlay-wrap:hover .overlay-nav {
+  opacity: 1;
+}
+
+/* Keep disabled arrows slightly visible */
+.lesson-overlay-wrap .overlay-nav.Mui-disabled {
+  opacity: .35;
+}
+
+/* Better usability on touch devices: show arrows by default */
+@media (pointer: coarse) {
+  .lesson-overlay-wrap .overlay-nav {
+    opacity: .85;
+  }
+}
+
+/* Convenience classes for placement if you want to use them */
+.lesson-overlay-wrap .overlay-nav.prev { left: 8px; }
+.lesson-overlay-wrap .overlay-nav.next { right: 8px; }
+
+
+/* ---- Base: overlay nav attached to the lesson area ---- */
+.lesson-overlay-wrap {
+  position: relative;
+}
+
+/* Default desktop behavior: fade in on hover */
+.lesson-overlay-wrap .overlay-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  background: rgba(0,0,0,.35);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .35);
+  opacity: 0;
+  transition: opacity .2s ease, background .2s ease;
+  width: 44px;              /* comfortable pointer size */
+  height: 44px;
+}
+.lesson-overlay-wrap .overlay-nav.prev { left: 8px; }
+.lesson-overlay-wrap .overlay-nav.next { right: 8px; }
+
+.lesson-overlay-wrap:hover .overlay-nav { opacity: 1; }
+
+.lesson-overlay-wrap .overlay-nav.Mui-disabled { opacity: .35; }
+
+/* slightly bigger chevrons without changing logic */
+.overlay-icon { font-size: 30px; }
+
+/* Make sure the media fills the card width */
+.lesson-overlay-wrap video,
+.lesson-overlay-wrap iframe {
+  width: 100% !important;
+  height: auto;
+  display: block;
+}
+
+/* If your player uses an intrinsic ratio, keep 16:9 */
+[data-vjs-player] .video-js.vjs-fluid { padding-top: 56.25% !important; }
+[data-vjs-player] .video-js { width: 100% !important; min-height: 200px; background: #000; }
+
+/* ---- Up-next overlay icon placement (desktop) ---- */
+.upnext-prev,
+.upnext-next {
+  position: absolute !important;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: rgba(255,255,255,.14) !important;
+  color: #fff !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35) !important;
+  width: 44px;
+  height: 44px;
+}
+.upnext-prev { left: 8px; }
+.upnext-next { right: 8px; }
+
+.upnext-close {
+  position: absolute !important;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  color: #e5e7eb !important;
+}
+
+/* =======================
+   MOBILE / SMALL SCREENS
+   ======================= */
+@media (max-width: 767.98px) {
+  /* Tighten card padding on small screens (no logic changes) */
+  .card.p-3 { padding: 0.75rem !important; }
+
+  /* Always show overlay arrows on touch devices and enlarge touch target */
+  .lesson-overlay-wrap .overlay-nav {
+    opacity: 1;                      /* visible by default */
+    width: 56px;                     /* bigger tap target */
+    height: 56px;
+    background: rgba(0,0,0,.45);
+  }
+  .overlay-icon { font-size: 34px; }
+
+  .lesson-overlay-wrap .overlay-nav.prev { left: 6px; }
+  .lesson-overlay-wrap .overlay-nav.next { right: 6px; }
+
+  /* Ensure the media never overflows the viewport */
+  .lesson-overlay-wrap video,
+  .lesson-overlay-wrap iframe,
+  [data-vjs-player] .video-js { max-width: 100vw; }
+
+  /* Up-next controls: larger tap areas */
+  .upnext-prev, .upnext-next {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Medium screens tweaks (tablets) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .lesson-overlay-wrap .overlay-nav { opacity: 1; } /* show without hover */
+  .overlay-icon { font-size: 32px; }
+}
+
+/* Better support for coarse pointers even on large viewports */
+@media (pointer: coarse) {
+  .lesson-overlay-wrap .overlay-nav { opacity: 1; }
+}
+
+/* Keep arrows readable when disabled */
+.overlay-nav.Mui-disabled { background: rgba(0,0,0,.25) !important; }
+
+/* Optional: give the whole card a slight radius and prevent clipping */
+.card { border-radius: 8px; overflow: visible; }
+
+
+
+/* ---------- Mobile top bar alignment ---------- */
+@media (max-width: 991.98px) {
+  .lesson-topbar {
+    /* Use grid for crisp two-column alignment on mobile */
+    display: grid;
+    grid-template-columns: 1fr auto; /* left text, right actions */
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .lesson-topbar .type-label {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* prevent wrapping long section titles */
+  }
+
+  .lesson-topbar .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;          /* spacing between % and Content button */
+    justify-self: end;    /* stick to the right */
+  }
+
+  .lesson-topbar .progress-pill {
+    margin: 0;           /* tighten spacing so pill + button sit nicely */
+  }
+
+  .lesson-topbar .content-btn {
+    padding-inline: 0.6rem; /* slightly tighter for small screens */
+  }
+}
+
+/* Optional: smooth the card’s inner spacing on very narrow devices */
+@media (max-width: 575.98px) {
+  .lesson-overlay-wrap {
+    border-radius: 8px;
+  }
+}
+
+
+.lesson-overlay-wrap:fullscreen,
+.lesson-overlay-wrap:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+.lesson-overlay-wrap:fullscreen video,
+.lesson-overlay-wrap:-webkit-full-screen video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* or 'cover' if you prefer */
+}
+
+
+
+/* === Make prev/next arrows visible and on top IN FULLSCREEN === */
+/* We keep them below the Up-Next Backdrop (2147483650) but above the cp-bar (2147483648). */
+
+body.app-fs .lesson-overlay-wrap .overlay-nav {
+  position: fixed;                 /* anchor to viewport when FS is active */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2147483649;             /* above cp-bar, below Backdrop */
+  opacity: .95;                    /* don't hide them behind hover in FS */
+  background: rgba(0,0,0,.45);     /* a touch more contrast in FS */
+  width: 56px;                     /* larger hit target in FS */
+  height: 56px;
+}
+
+body.app-fs .lesson-overlay-wrap .overlay-nav.prev { left: 12px; }
+body.app-fs .lesson-overlay-wrap .overlay-nav.next { right: 12px; }
+
+/* Keep disabled arrows still slightly visible */
+body.app-fs .lesson-overlay-wrap .overlay-nav.Mui-disabled {
+  opacity: .5;
+}
+
+/* Optional: when not fullscreen, keep your existing behavior (hover fade-in) */
